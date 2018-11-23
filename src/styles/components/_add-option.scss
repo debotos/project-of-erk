@@ -1,0 +1,58 @@
+.add-option-error {
+    color: $off-white;
+    font-style: italic;
+    margin: $m-size 0 0 0;
+    padding: 0 $m-size;
+
+}
+
+.add-option {
+    display: flex;
+    padding: $m-size;
+}
+
+.add-option__input {
+    background: $dark-blue;
+    border: none;
+    color: $off-white;
+    width: 4rem;
+    border-bottom: .3rem solid darken($dark-blue, 10%);
+flex-grow: 1;
+margin-right: $s-size;
+padding: $s-size;
+
+}
+
+.add-option-color{
+    color: white;
+}
+
+.add-color__input {
+    background: $dark-blue;
+    border: none;
+    color: $off-white;
+    width: 4rem;
+    border-bottom: .3rem solid darken($dark-blue, 10%);
+flex-grow: 1;
+margin-right: $s-size;
+padding: $s-size;
+
+}
+
+
+
+.add-price__input {
+    background: $dark-blue;
+    border: none;
+    width: 4rem;
+    color: $off-white;
+    border-bottom: .3rem solid darken($dark-blue, 10%);
+flex-grow: 1;
+margin-right: $s-size;
+padding: $s-size;
+
+}
+
+.add-option__color {
+    background: white;
+}

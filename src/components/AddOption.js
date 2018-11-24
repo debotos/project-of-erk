@@ -40,7 +40,7 @@ class AddOption extends React.Component {
 		if (!domains || !ranges) return null;
 		let selectOptions = domains.map((domain, index) => {
 			// let rangeIndex = ranges.indexOf(ranges[index]);
-			return { label: domain, value: ranges[index] };
+			return { label: domain, value: domain };
 		});
 		// console.log(selectOptions);
 		return (

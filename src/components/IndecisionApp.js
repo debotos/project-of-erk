@@ -11,7 +11,7 @@ import Dictionaries from './Dictionaries';
 export default class IndecisionApp extends React.Component {
 	state = {
 		options: ['Apple iPhone 6s', 'Samsung Galaxy S8', 'Huawei P9'],
-		colors: ['Dark Grey', 'Black', 'Silver'], // it refers to the the ranges array according to domains
+		colors: ['Stonegrey', 'Midnight Black', 'Mystic Silver'], // it refers to the the domains array
 		prices: ['CHF 769', 'CHF 569', 'CHF 272'],
 		domains: ['Stonegrey', 'Midnight Black', 'Mystic Silver'],
 		ranges: ['Dark Grey', 'Black', 'Silver'],
@@ -27,7 +27,9 @@ export default class IndecisionApp extends React.Component {
 		this.setState(() => ({
 			options: ['Apple iPhone 6s', 'Samsung Galaxy S8', 'Huawei P9']
 		}));
-		this.setState(() => ({ colors: ['Dark Grey', 'Black', 'Silver'] }));
+		this.setState(() => ({
+			colors: ['Stonegrey', 'Midnight Black', 'Mystic Silver']
+		}));
 		this.setState(() => ({ prices: ['CHF 769', 'CHF 569', 'CHF 272'] }));
 	};
 

@@ -11,7 +11,7 @@ import Dictionaries from './Dictionaries';
 export default class IndecisionApp extends React.Component {
 	state = {
 		options: ['Apple iPhone 6s', 'Samsung Galaxy S8', 'Huawei P9'],
-		colors: [0, 1, 2], // it refers to the index of the ranges array
+		colors: ['Dark Grey', 'Black', 'Silver'], // it refers to the the ranges array according to domains
 		prices: ['CHF 769', 'CHF 569', 'CHF 272'],
 		domains: ['Stonegrey', 'Midnight Black', 'Mystic Silver'],
 		ranges: ['Dark Grey', 'Black', 'Silver'],
@@ -27,15 +27,24 @@ export default class IndecisionApp extends React.Component {
 		this.setState(() => ({
 			options: ['Apple iPhone 6s', 'Samsung Galaxy S8', 'Huawei P9']
 		}));
-		this.setState(() => ({ colors: [0, 1, 2] }));
+		this.setState(() => ({ colors: ['Dark Grey', 'Black', 'Silver'] }));
 		this.setState(() => ({ prices: ['CHF 769', 'CHF 569', 'CHF 272'] }));
 	};
 
 	handleShowDictionary = () => {
-		this.setState(() => ({
-			domains: ['Stonegrey', 'Midnight Black', 'Mystic Silver']
-		}));
-		this.setState(() => ({ ranges: ['Dark Grey', 'Black', 'Silver'] }));
+		this.setState(
+			() => ({
+				domains: ['Stonegrey', 'Midnight Black', 'Mystic Silver'],
+				ranges: ['Dark Grey', 'Black', 'Silver']
+			}),
+			() => {
+				console.log('Setting up Default Dictionary data!');
+				const domains = JSON.stringify(this.state.domains);
+				const ranges = JSON.stringify(this.state.ranges);
+				localStorage.setItem('domains', domains);
+				localStorage.setItem('ranges', ranges);
+			}
+		);
 	};
 
 	handleClearSelectedOption = () => {
@@ -56,16 +65,29 @@ export default class IndecisionApp extends React.Component {
 	};
 
 	handleDeleteDictionary = (domainToRemove, rangeToRemove) => {
-		this.setState(prevState => ({
-			domains: prevState.domains.filter(domain => domainToRemove !== domain),
-			ranges: prevState.ranges.filter(range => rangeToRemove !== range)
-		}));
+		this.setState(
+			prevState => ({
+				domains: prevState.domains.filter(domain => domainToRemove !== domain),
+				ranges: prevState.ranges.filter(range => rangeToRemove !== range)
+			}),
+			() => {
+				console.log('Removing Dictionary from localStorage!');
+				const domains = JSON.stringify(this.state.domains);
+				const ranges = JSON.stringify(this.state.ranges);
+				localStorage.setItem('domains', domains);
+				localStorage.setItem('ranges', ranges);
+			}
+		);
 	};
 
 	handleDeleteDictionaries = () => {
-		this.setState(() => ({ domains: [] }));
-		this.setState(() => ({ ranges: [] }));
-		this.setState(() => ({ colors: [] }));
+		this.setState({ domains: [], ranges: [] }, () => {
+			console.log('Removing Dictionary from localStorage!');
+			const domains = JSON.stringify(this.state.domains);
+			const ranges = JSON.stringify(this.state.ranges);
+			localStorage.setItem('domains', domains);
+			localStorage.setItem('ranges', ranges);
+		});
 	};
 
 	handlePick = () => {
@@ -87,18 +109,19 @@ export default class IndecisionApp extends React.Component {
 
 		if (!color) {
 			return 'Enter a valid value to add item';
-		} // here in the else block you can implemet 'already exists logic'
-		// also in the dropdown component you can do it
+		} else if (this.state.colors.indexOf(color) > -1) {
+			return 'This color already exists';
+		}
 
 		if (!price) {
 			return 'Enter a valid value to add item';
-		} else if (this.state.prices.indexOf(option) > -1) {
+		} else if (this.state.prices.indexOf(price) > -1) {
 			return 'This price already exists';
 		}
 
 		this.setState(prevState => ({
 			options: prevState.options.concat(option),
-			colors: prevState.colors.concat(parseInt(color, 10)),
+			colors: prevState.colors.concat(color),
 			prices: prevState.prices.concat(price)
 		}));
 	};

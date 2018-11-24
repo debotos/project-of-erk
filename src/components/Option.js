@@ -14,7 +14,7 @@ const Option = props => {
 				onClick={e => {
 					props.handleDeleteOption(
 						props.optionText,
-						props.colorIndex,
+						props.colorText,
 						props.priceText
 					);
 				}}

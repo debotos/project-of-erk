@@ -22,15 +22,12 @@ const Options = props => {
 				<p className="widget__message">Please add a Product to get started!</p>
 			)}
 			{props.options.map((option, index) => {
-				let colorIndex = props.colors[index];
-				let colorText = props.ranges[colorIndex];
-
+				let colorText = props.colors[index];
 				return (
 					<div key={option}>
 						<Option
 							optionText={option}
 							colorText={colorText}
-							colorIndex={colorIndex}
 							priceText={props.prices[index]}
 							count={index + 1}
 							handleDeleteOption={props.handleDeleteOption}
